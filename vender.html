@@ -43,8 +43,11 @@
             <form class="main-container__form" class="agregar" id="formRegistro">
                 <h2>Agregar items</h2>
                 <input type="text" id="main-container__form__nombre" placeholder="Nombre"  required>
-                <input type="text" id="main-container__form__precio" placeholder="Precio"  required>
+                <small id="small_nombre"></small>
+                <input type="number" id="main-container__form__precio" placeholder="Precio"  required>
+                <small id="small_precio"></small>
                 <textarea type="text" id="main-container__form__descripcion" placeholder="Descripcion"  required></textarea>
+                <small id="small_descripcion"></small>
                 
                 <div class="main-container__form__label-oferta-envio">
                     <label for="main-container__form__oferta">Oferta</label>
@@ -65,7 +68,7 @@
 
                 <input type="submit" id="main-container__form__agregar" placeholder="Agregar" class="main-container__input_lastchild">
                 <p id="main-container__error"></p>
-
+                <small id="small_input_sin_rellenar"></small>
                
             </form>
 
@@ -76,6 +79,7 @@
         </div>
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./javascript/funciones.js"></script>
     <script src="./javascript/objeto.js"></script>
     <script src="./javascript/vender.js"></script>

@@ -197,91 +197,127 @@ main{
             flex-wrap: wrap;
             
             article{
-                display: grid;
-                grid-template-areas: "titulo" "imagen" "precio" "descripcion" "boton";
-                grid-template-columns: 1fr;
-                grid-template-rows: 1fr 1fr 3fr 1fr 2fr 1fr;
                 margin:auto 6rem 2rem 0;
                 width: 25%;
                 height: 30rem;
-                justify-content: center;
-                background-color: rgb(56, 22, 87);
-                padding: 1rem;
-                border-radius: .5rem;
                 position: relative;
-                .precio{
-                    grid-area: precio;
-                    margin-top: .2rem;
-                    text-align: center;
-                    font-size: 1.2rem;
-                    letter-spacing: .1rem;
-                }
-
-                .descripcion{
-                    grid-area: descripcion;
-                    margin-top: .2rem;
-                    
-                }
-
-                h3{
-                    grid-area: titulo;
-                     text-align: center;
-                     font-size: 1rem;
-                     
-                }
-                .imagen{
-                    display: block;
-                    grid-area: imagen;
-                    width: 18rem;
-                    margin:auto;
-                    margin-top: 1rem;
-                    
-                }
-
-                .equis{
-                    display: none;
-                   
-                }
-
-                .oferta{
-                    display: none;
+                transition: all .5s linear;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                .cara-delantera{
+                    padding: 1rem;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: .5rem;
+                    display: grid;
+                    grid-template-areas: "titulo" "imagen" "precio" "descripcion" "boton";
+                    grid-template-columns: 1fr;
+                    grid-template-rows: 1fr 1fr 3fr 1fr 2fr 1fr;
+                    justify-content: center;
+                    background-color: rgb(56, 22, 87);
                     position: absolute;
-                    left: 0;
-                    span{
-                        background-color: rgba(255, 68, 0, 0.534);
-                        padding: .1rem .2rem;
-                        border-radius: .2rem;
+                    backface-visibility: hidden;
+                    .precio{
+                        grid-area: precio;
+                        margin-top: .2rem;
+                        text-align: center;
+                        font-size: 1.2rem;
+                        letter-spacing: .1rem;
                     }
-                }
 
-                .envioGratis{
-                   display: none;
-                    max-width:50%;
-                    position: absolute;
-                    
-                    left:.8rem;
-                    top:12rem;
-                    span{
-                        background-color: rgb(15, 165, 23);
-                        padding: .1rem .3rem;
-                        border-radius: .2rem;
+                    .descripcion{
+                        grid-area: descripcion;
+                        margin-top: .2rem;
                         
                     }
+
+                    h3{
+                        grid-area: titulo;
+                        text-align: center;
+                        font-size: 1rem;
+                        
+                    }
+                    .imagen{
+                        display: block;
+                        grid-area: imagen;
+                        width: 18rem;
+                        margin:auto;
+                        margin-top: 1rem;
+                        
+                    }
+
+                    .equis{
+                        display: none;
                     
+                    }
+
+                    .oferta{
+                        display: none;
+                        position: absolute;
+                        left: 0;
+                        span{
+                            background-color: rgba(255, 68, 0, 0.534);
+                            padding: .1rem .2rem;
+                            border-radius: .2rem;
+                        }
+                    }
+
+                    .envioGratis{
+                    display: none;
+                        max-width:50%;
+                        position: absolute;
+                        
+                        left:.8rem;
+                        top:12rem;
+                        span{
+                            background-color: rgb(15, 165, 23);
+                            padding: .1rem .3rem;
+                            border-radius: .2rem;
+                            
+                        }
+                        
+                    }
+                    .boton{
+                        
+                        left: 25%;
+                        padding: .2rem;
+                        border-radius: .2rem;
+                        background-color: rgb(0, 136, 84);
+                        border: none;
+                        cursor: pointer;
+                        width: 50%;
+                        margin: auto;
+                        color:#fff;
+                    }
                 }
-                .boton{
+
+                .cara-trasera{
+                    overflow: hidden;
+                    width: 100%;
+                    height: 0%;
+                    border-radius: .5rem;
+                    background-color: green;
                     position: absolute;
-                    bottom: 1.2rem;
-                    left: 25%;
-                    padding: .2rem;
-                    border-radius: .2rem;
-                    background-color: rgb(0, 136, 84);
-                    border: none;
-                    cursor: pointer;
-                    width: 50%;
+                    transform:rotateY(180deg);
                     margin: auto;
-                    color:#fff;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    img{
+                        width: 50%;
+                        
+                    }
+
+                    p{
+                        margin-top: .5rem;
+                        width: 80%;
+                        text-align: center;
+                        font-size:1.2rem;
+                    }
                 }
+
+                
             }
         }
 
@@ -307,4 +343,8 @@ main{
         }
     }
 
+}
+
+.input_faltan_caracteres{
+    border: solid 3px red !important;
 }

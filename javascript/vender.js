@@ -1,3 +1,5 @@
+
+//GUARDO TODOS LOS INPUT 
 const nombre = document.querySelector('#main-container__form__nombre');
 const precio = document.querySelector('#main-container__form__precio');
 const descripcion = document.querySelector('#main-container__form__descripcion');
@@ -10,8 +12,6 @@ const categoria = document.querySelector('#main-container__form__categorias')
 
 
 agregar.addEventListener('click',()=>{
-    //oferta.checked;
-    //envio.checked;
     let nombreArticulo = nombre.value;
     let precioArticulo = precio.value;
     let descripcionArticulo = descripcion.value;
@@ -20,6 +20,7 @@ agregar.addEventListener('click',()=>{
     let categoriasArticulo = categoria.value;
     let imagenArticulo = "";
 
+    //DEPENDE LA CATEGORIA, GUARDO UNA IMAGEN GENERICA
     if(categoriasArticulo==0){
         categoriasArticulo="celular";
         imagenArticulo="celular.jpg"
@@ -33,10 +34,11 @@ agregar.addEventListener('click',()=>{
         categoriasArticulo="computadora";
         imagenArticulo="notebook.png"
     }
+    //CREO EL OBJETO
     let nuevoObjeto = new Objeto(nombreArticulo,precioArticulo,descripcionArticulo,categoriasArticulo,imagenArticulo,0,ofertaArticulo,envioArticulo);
+
+    //UTILIZO UN ARRAY PARA GUARDAR LOS OBJETOS
     let arrayObjetos = []
-
-
     let listaOb = JSON.parse(localStorage.getItem('vendidos'));
 
     if(listaOb == null){
@@ -99,3 +101,68 @@ equis.forEach((element)=>{
 
 })
 
+
+//VALIDAR INPUTS CON JQUERY
+
+//NOMBRE
+$("#main-container__form__nombre").on("change",function(){
+
+    //PREGUNTO SI "nombre" TIENE MENOS DE 5 CARACTERES
+    if($("#main-container__form__nombre").val().length<5){
+        $("#main-container__form__nombre").addClass("input_faltan_caracteres")
+        $("#small_nombre").text("*El nombre debe tener al menos 5 carácteres")
+    }else{
+        $("#main-container__form__nombre").removeClass("input_faltan_caracteres")
+        $("#small_nombre").text("")
+    }
+
+    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+    }else{
+        $("#small_input_sin_rellenar").text("")
+    }
+})
+
+//PRECIO
+$("#main-container__form__precio").on("change",function(){
+    //PREGUNTO SI "precio" TIENE MENOS DE 2 DÍGITOS
+    if($("#main-container__form__precio").val().length<2){
+        $("#main-container__form__precio").addClass("input_faltan_caracteres")
+        $("#small_precio").text("*El precio debe tener al menos 2 dígitos")
+    }else{
+        $("#main-container__form__precio").removeClass("input_faltan_caracteres")
+        $("#small_precio").text("")
+    }
+
+    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+    }else{
+        $("#small_input_sin_rellenar").text("")
+    }
+})
+
+
+//DESCRIPCION
+$("#main-container__form__descripcion").on("change",function(){
+    //PREGUNTO SI "descripcion" TIENE MENOS DE 10 CARACTERES
+    if($("#main-container__form__descripcion").val().length<10){
+        $("#main-container__form__descripcion").addClass("input_faltan_caracteres")
+        $("#small_descripcion").text("*La descripción debe tener al menos 10 carácteres")
+    }else{
+        $("#main-container__form__descripcion").removeClass("input_faltan_caracteres")
+        $("#small_descripcion").text("")
+    }
+
+    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+    }else{
+        $("#small_input_sin_rellenar").text("")
+    }
+})
+
+
+
+ 

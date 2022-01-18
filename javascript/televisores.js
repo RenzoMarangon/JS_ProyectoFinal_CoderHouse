@@ -37,5 +37,11 @@ buscador.onchange=()=>{
     }
 }
 
+const botonAgregar = document.querySelectorAll('.boton');
 
+botonAgregar.forEach((element)=>{
+    element.addEventListener('click',()=>{
+        agregarAlCarrito(element,listaTeles);
+    })
+})
 
