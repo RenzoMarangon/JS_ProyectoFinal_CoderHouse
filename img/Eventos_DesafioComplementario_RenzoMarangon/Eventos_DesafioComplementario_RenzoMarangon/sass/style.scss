@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    
+    height: 100vh;
+    width: 100vw;
+    .agregar{
+        width: 80%;
+        margin:1rem auto auto auto;
+        display: flex;
+        flex-direction: column;
+
+        
+        input{
+            width: 20%;
+            margin:.1rem 0;
+            padding: .1rem;
+            border-radius: .1rem;
+            border: none;
+            outline: none;
+            background-color: gainsboro;
+            opacity: .9;
+            &:focus{
+                outline: thin solid rgb(128, 0, 128);
+            }
+            
+        }
+
+    }
+
+    .contenedor{
+        width: 80%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        article{
+            width: 16rem;
+            height: 20rem;
+            display: flex;
+            margin: 2rem 2rem 0 0;
+            flex-direction: column;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.527);
+            border-radius: 1rem;
+            color: white;
+            position: relative;
+            justify-content: center;
+            
+            p{
+                
+                span{
+                    color: rebeccapurple;
+                    font-weight: bold;
+                }
+            }
+
+            img{
+                display: block;
+               width: 75%;
+               height: 80%;
+               margin:auto;
+            }
+
+            .tipo{
+               position: absolute;
+               right: 2%;
+               top: 13%;
+               color:rgb(253, 138, 97)
+
+            }
+
+            .gold{
+                color:gold;
+            }
+
+            .equis{
+                font-size: .6rem;
+                padding: .3rem;
+                background-color: rgb(151, 35, 35);
+                border-radius: .6rem;
+                position: absolute;
+                top: .5rem;
+                left: .5rem;
+                cursor: pointer;
+                opacity: .5;
+            }
+        }
+    }
+}
+
+.error{
+    border: 1px solid red !important;
+    
+}
+#error{
+    display: none;
+}

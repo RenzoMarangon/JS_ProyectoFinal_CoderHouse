@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-container__logo">
+                <img src="./img/logo.png" alt="Logo">
+                <h1>Comprame wachin</h1>
+            </div>
+            <ul class="header-container__ul">
+                <li class="header-container__li"><a href="./index.html">Inicio</a></li>
+
+                <li class="header-container__li header-container__li__categorias">
+                    <a href="">Categorias</a>
+                    <ul class="header-container__sub-ul">
+                        <li><a href="./televisores.html">Televisores</a></li>
+                        <li><a href="./celulares.html">Celulares</a></li>
+                        <li><a href="./computadoras.html">Computadoras</a></li>
+                    </ul>
+                </li>
+                
+                <li class="header-container__li"><a href="./ofertas.html">Ofertas</a></li>
+                <li class="header-container__li"><a href="./vender.html">Vender</a></li>
+                <li class="header-container__li"><a href="./carrito.html">Carrito</a></li>
+                <li class="header-container__li header-container__li__input">
+                    <input type="text" id="header-container__li__inputVendidos">
+                    <img src="./img/lupa.png" alt="buscar" id="header-container__li__buscarArticulosVendidos">
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        
+         
+        <div class="main-container">
+            <form class="main-container__form" class="agregar" id="formRegistro">
+                <h2>Agregar items</h2>
+                <input type="text" id="main-container__form__nombre" placeholder="Nombre"  required>
+                <input type="text" id="main-container__form__precio" placeholder="Precio"  required>
+                <textarea type="text" id="main-container__form__descripcion" placeholder="Descripcion"  required></textarea>
+                
+                <div class="main-container__form__label-oferta-envio">
+                    <label for="main-container__form__oferta">Oferta</label>
+                    <input type="checkbox" id="main-container__form__oferta" name="main-container__form__oferta">
+                </div>
+                
+                <div class="main-container__form__label-oferta-envio">
+                    <label for="main-container__form__envioGratis">Envio gratis</label>
+                    <input type="checkbox" id="main-container__form__envioGratis" name="main-container__form__envioGratis">
+                </div>
+
+                <select name="categorias" id="main-container__form__categorias">
+                    <option value="0">Celular</option>
+                    <option value="1">Televisor</option>
+                    <option value="2">Computadora</option>
+                    <option value="3">notebook</option>
+                </select>
+
+                <input type="submit" id="main-container__form__agregar" placeholder="Agregar" class="main-container__input_lastchild">
+                <p id="main-container__error"></p>
+
+               
+            </form>
+
+
+            <div class="main-container__notificacion"></div>
+            <div class="main-container__vendidos" id="main-container__vendidos"></div>
+            
+        </div>
+    </main>
+
+    <script src="./javascript/funciones.js"></script>
+    <script src="./javascript/objeto.js"></script>
+    <script src="./javascript/vender.js"></script>
+
+    
+</body>
+</html>
+        
+       
