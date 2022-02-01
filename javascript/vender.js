@@ -1,3 +1,65 @@
+$(()=>{
+    //VALIDAR INPUTS CON JQUERY
+
+    //NOMBRE
+    $("#main-container__form__nombre").on("change",function(){
+
+        //PREGUNTO SI "nombre" TIENE MENOS DE 5 CARACTERES
+        if($("#main-container__form__nombre").val().length<5){
+            $("#main-container__form__nombre").addClass("input_faltan_caracteres")
+            $("#small_nombre").text("*El nombre debe tener al menos 5 carácteres")
+        }else{
+            $("#main-container__form__nombre").removeClass("input_faltan_caracteres")
+            $("#small_nombre").text("")
+        }
+
+        //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+        if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+            $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+        }else{
+            $("#small_input_sin_rellenar").text("")
+        }
+    })
+
+    //PRECIO
+    $("#main-container__form__precio").on("change",function(){
+        //PREGUNTO SI "precio" TIENE MENOS DE 2 DÍGITOS
+        if($("#main-container__form__precio").val().length<2){
+            $("#main-container__form__precio").addClass("input_faltan_caracteres")
+            $("#small_precio").text("*El precio debe tener al menos 2 dígitos")
+        }else{
+            $("#main-container__form__precio").removeClass("input_faltan_caracteres")
+            $("#small_precio").text("")
+        }
+
+        //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+        if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+            $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+        }else{
+            $("#small_input_sin_rellenar").text("")
+        }
+})
+
+
+//DESCRIPCION
+$("#main-container__form__descripcion").on("change",function(){
+    //PREGUNTO SI "descripcion" TIENE MENOS DE 10 CARACTERES
+    if($("#main-container__form__descripcion").val().length<10){
+        $("#main-container__form__descripcion").addClass("input_faltan_caracteres")
+        $("#small_descripcion").text("*La descripción debe tener al menos 10 carácteres")
+    }else{
+        $("#main-container__form__descripcion").removeClass("input_faltan_caracteres")
+        $("#small_descripcion").text("")
+    }
+
+    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+    }else{
+        $("#small_input_sin_rellenar").text("")
+    }
+})
+})
 
 //GUARDO TODOS LOS INPUT 
 const nombre = document.querySelector('#main-container__form__nombre');
@@ -23,13 +85,13 @@ agregar.addEventListener('click',()=>{
     //DEPENDE LA CATEGORIA, GUARDO UNA IMAGEN GENERICA
     if(categoriasArticulo==0){
         categoriasArticulo="celular";
-        imagenArticulo="celular.jpg"
+        imagenArticulo="celular.png"
     }else if (categoriasArticulo==1){
         categoriasArticulo="televisor";
         imagenArticulo="televisor.png"
     }else if (categoriasArticulo==2){
         categoriasArticulo="computadora";
-        imagenArticulo="computadora.jpg"
+        imagenArticulo="computadora.png"
     }else{
         categoriasArticulo="computadora";
         imagenArticulo="notebook.png"
@@ -64,105 +126,47 @@ for(let i = 0; i<listaOb.length;i++){
     let caja = document.querySelector('#main-container__vendidos').children[i];
     dibujarCartelOfertaEnvio(listaOb[i],caja);
     
+    mostrarQuitarEquis(caja);
+
+    
 }
  
 
+eliminarElementosCarritoVenta(listaOb,"vendidos");
 
 
 const buscarVendidos = document.querySelector('#header-container__li__inputVendidos');
 const lupaVendidos = document.querySelector('#header-container__li__buscarArticulosVendidos');
 
 lupaVendidos.addEventListener('click',()=>{
-    let resultadoVendidos = listaOb.filter(element=>element.categoria.toLowerCase().includes(buscarVendidos.value.toLowerCase()) || element.nombre.toLowerCase().includes(buscarVendidos.value.toLowerCase()));
-    contenedorVendidos.innerHTML="";
-    for(let i = 0; i<resultadoVendidos.length;i++){
-        dibujarArticulo(resultadoVendidos[i],contenedorVendidos);
-        let caja = document.querySelector('#main-container__vendidos').children[i];
-        dibujarCartelOfertaEnvio(resultadoVendidos[i],caja);
-    }
-});
+    //FILTRO EL RESULTADO DE LA BUSQUEDA
+    buscarElementos(buscarVendidos,listaOb,contenedorVendidos,"#main-container__vendidos");
+    eliminarElementosCarritoVenta(listaOb,"vendidos");
+    
+})
 
-buscarVendidos.onchange=()=>{
-    contenedorVendidos.innerHTML="";
-    for(let i = 0; i<listaOb.length;i++){
-        dibujarArticulo(listaOb[i],contenedorVendidos);
-        let caja = document.querySelector('#main-container__vendidos').children[i];
-        dibujarCartelOfertaEnvio(listaOb[i],caja);
-    }
-}
+//LO MISMO PERO TOCO ENTER
+$(()=>{
+    $(document).keypress(function(e){
+        if(e.keyCode==13){
+            buscarElementos(buscarVendidos,listaOb,contenedorVendidos,"#main-container__vendidos");
+            eliminarElementosCarritoVenta(listaOb,"vendidos");
 
-const equis = document.querySelectorAll('.equis');
-
-
-equis.forEach((element)=>{
-    element.addEventListener('click',()=>{
-        eliminarArticulo(element,listaOb,"vendidos");
+            let articulosEnVenta = document.querySelector('#main-container__vendidos').children;
+            for(element of articulosEnVenta){
+                mostrarQuitarEquis(element);
+            }
+        }
     })
-
 })
 
+//CUANDO BORRAN EL CONTENIDO, BORRO LO QUE ESTE EN EL CONTAINER Y DIBUJO TODA LA LISTA DE CELULARES
+buscarVendidos.onchange=()=>{
+    borrarResultadosBusqueda(contenedorVendidos,listaOb,"#main-container__vendidos");
+    eliminarElementosCarritoVenta(listaOb,"vendidos");
 
-//VALIDAR INPUTS CON JQUERY
-
-//NOMBRE
-$("#main-container__form__nombre").on("change",function(){
-
-    //PREGUNTO SI "nombre" TIENE MENOS DE 5 CARACTERES
-    if($("#main-container__form__nombre").val().length<5){
-        $("#main-container__form__nombre").addClass("input_faltan_caracteres")
-        $("#small_nombre").text("*El nombre debe tener al menos 5 carácteres")
-    }else{
-        $("#main-container__form__nombre").removeClass("input_faltan_caracteres")
-        $("#small_nombre").text("")
-    }
-
-    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
-    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
-        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
-    }else{
-        $("#small_input_sin_rellenar").text("")
-    }
-})
-
-//PRECIO
-$("#main-container__form__precio").on("change",function(){
-    //PREGUNTO SI "precio" TIENE MENOS DE 2 DÍGITOS
-    if($("#main-container__form__precio").val().length<2){
-        $("#main-container__form__precio").addClass("input_faltan_caracteres")
-        $("#small_precio").text("*El precio debe tener al menos 2 dígitos")
-    }else{
-        $("#main-container__form__precio").removeClass("input_faltan_caracteres")
-        $("#small_precio").text("")
-    }
-
-    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
-    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
-        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
-    }else{
-        $("#small_input_sin_rellenar").text("")
-    }
-})
-
-
-//DESCRIPCION
-$("#main-container__form__descripcion").on("change",function(){
-    //PREGUNTO SI "descripcion" TIENE MENOS DE 10 CARACTERES
-    if($("#main-container__form__descripcion").val().length<10){
-        $("#main-container__form__descripcion").addClass("input_faltan_caracteres")
-        $("#small_descripcion").text("*La descripción debe tener al menos 10 carácteres")
-    }else{
-        $("#main-container__form__descripcion").removeClass("input_faltan_caracteres")
-        $("#small_descripcion").text("")
-    }
-
-    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
-    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
-        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
-    }else{
-        $("#small_input_sin_rellenar").text("")
-    }
-})
-
-
-
- 
+    let articulosEnVenta = document.querySelector('#main-container__vendidos').children;
+            for(element of articulosEnVenta){
+                mostrarQuitarEquis(element);
+            }
+};

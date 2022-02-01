@@ -34,32 +34,34 @@ for(let i = 0; i<listaOfertas.length;i++){
 let lupa = document.querySelector('#header-container__li__buscarOfertas');
 let buscador = document.querySelector('#header-container__li__inputOfertas');
 
+
+
 lupa.addEventListener('click',()=>{
-    const busquedaOfertas = listaOfertas.filter(element=>element.categoria.toLowerCase().includes(buscador.value.toLowerCase()) || element.nombre.toLowerCase().includes(buscador.value.toLowerCase()));
-    containerOfertas.innerHTML='';
-    for(let i = 0; i<busquedaOfertas.length;i++){
-        dibujarArticulo(busquedaOfertas[i],containerOfertas);
-        let caja = document.querySelector("#main-container__ofertas").children[i]
-        dibujarCartelOfertaEnvio(busquedaOfertas[i],caja);
-    }
-});
+    //FILTRO EL RESULTADO DE LA BUSQUEDA
+    buscarElementos(buscador,listaOfertas,containerOfertas,"#main-container__ofertas");
+    funcionBotonAgregarAlCarrito(listaOfertas)
 
-buscador.onchange=()=>{
-    containerOfertas.innerHTML='';
-    for(let i = 0; i<listaOfertas.length;i++){
-        dibujarArticulo(listaOfertas[i],containerOfertas);
-        let caja = document.querySelector("#main-container__ofertas").children[i]
-        dibujarCartelOfertaEnvio(listaOfertas[i],caja);
-    }
-};
+})
 
-
-const botonAgregarCarrito = document.querySelectorAll('.boton');
-
-botonAgregarCarrito.forEach((element)=>{
-    element.addEventListener('click',()=>{
-        agregarAlCarrito(element,listaOfertas);
+//LO MISMO PERO TOCO ENTER
+$(()=>{
+    $(document).keypress(function(e){
+        if(e.keyCode==13){
+            buscarElementos(buscador,listaOfertas,containerOfertas,"#main-container__ofertas");
+            funcionBotonAgregarAlCarrito(listaOfertas)
+            
+        }
     })
 })
+
+//CUANDO BORRAN EL CONTENIDO, BORRO LO QUE ESTE EN EL CONTAINER Y DIBUJO TODA LA LISTA D CELULARES
+buscador.onchange=()=>{
+    borrarResultadosBusqueda(containerTelevisores,listaOfertas,"#main-container__televisores")
+    funcionBotonAgregarAlCarrito(listaOfertas)
+
+}
+
+funcionBotonAgregarAlCarrito(listaOfertas)
+
 
 

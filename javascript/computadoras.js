@@ -16,34 +16,34 @@ for(let i = 0; i<listaCompus.length;i++){
 const lupa = document.querySelector('#header-container__li__buscarComputadoras');
 const buscador = document.querySelector('#header-container__li__inputComputadoras')
 
+
+//AL TOCAR LA LUPA FILTRO EL RESULTADO DE LA BUSQUEDA
 lupa.addEventListener('click',()=>{
-    const listaPC = listaCompus.filter(element=>element.categoria.toLowerCase().includes(buscador.value.toLowerCase()) || element.nombre.toLowerCase().includes(buscador.value.toLowerCase()));
-    containerComputadoras.innerHTML='';
-    for(let i = 0; i<listaPC.length;i++){
-        dibujarArticulo(listaPC[i],containerComputadoras);
-        let caja = document.querySelector("#main-container__computadoras").children[i]
-        dibujarCartelOfertaEnvio(listaPC[i],caja);
-    }
+    buscarElementos(buscador,listaCompus,containerComputadoras,"#main-container__computadoras");
+    funcionBotonAgregarAlCarrito(listaCompus);
 })
 
+//LO MISMO PERO TOCO ENTER
+$(()=>{
+    $(document).keypress(function(e){
+        if(e.keyCode==13){
+            buscarElementos(buscador,listaCompus,containerComputadoras,"#main-container__computadoras");
+            funcionBotonAgregarAlCarrito(listaCompus);
+        }
+    })
+})
+
+
+
 buscador.onchange=()=>{
-    containerComputadoras.innerHTML='';
-    for(let i = 0; i<listaCompus.length;i++){
-        dibujarArticulo(listaCompus[i],containerComputadoras);
-        //BUSCO EL CONTENEDOR DE CADA OBJETO
-        let caja = document.querySelector("#main-container__computadoras").children[i]
-        //EN CADA CONTENEDOR ME FIJO SI TIENE OFERTA O ENVIO GRATIS Y LO DIBUJO
-        dibujarCartelOfertaEnvio(listaCompus[i],caja);
-    }
+
+    borrarResultadosBusqueda(containerComputadoras,listaCompus,"#main-container__computadoras")
+    funcionBotonAgregarAlCarrito(listaCompus);
 }
 
 
-const botonAgregar = document.querySelectorAll('.boton');
+funcionBotonAgregarAlCarrito(listaCompus);
 
-botonAgregar.forEach((element)=>{
-    element.addEventListener('click',()=>{
-        agregarAlCarrito(element,listaCompus);
-    })
-})
+
 
 

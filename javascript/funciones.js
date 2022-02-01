@@ -36,6 +36,11 @@ const dibujarArticulo = (articulo,contenedor) =>{
             <p class="precio">$${articulo.precio}</p>
             <p class="descripcion">${articulo.descripcion}</p>
             <button class="boton">Agregar al carrito</button>
+            <div class="sumar-restar">
+                <p class="restar">-</p>
+                <p class="numero"></p>
+                <p class="sumar">+</p>
+            </div>
         </div>
 
         <div class="cara-trasera">
@@ -57,6 +62,27 @@ const dibujarCartelOfertaEnvio = (articulo,caja)=>{
     }
 }
 
+//BUSCAR ELEMENTOS AL HACER CLICK EN LA LUPA
+const buscarElementos = (inputBuscador, listaElementos,containerElementos,containerHTMLElementos)=>{
+    const lista = listaElementos.filter(element=>element.categoria.toLowerCase().includes(inputBuscador.value.toLowerCase()) || element.nombre.toLowerCase().includes(inputBuscador.value.toLowerCase()));
+    containerElementos.innerHTML='';
+    for(let i = 0; i<lista.length;i++){
+        dibujarArticulo(lista[i],containerElementos);
+        let caja = document.querySelector(containerHTMLElementos).children[i]
+        dibujarCartelOfertaEnvio(lista[i],caja);
+    }
+}
+
+
+//BORRAR LOS RESULTADOS DE LA BUSQUEDA
+const borrarResultadosBusqueda = (containerElementos,listaElementos,containerHTMLElementos) =>{
+    containerElementos.innerHTML='';
+    for(let i = 0; i<listaElementos.length;i++){
+        dibujarArticulo(listaElementos[i],containerElementos);
+        let caja = document.querySelector(containerHTMLElementos).children[i]
+        dibujarCartelOfertaEnvio(listaElementos[i],caja);
+    }
+}
 
 
 //ELIMINAR OBJETOS
@@ -78,6 +104,16 @@ const eliminarArticulo=(equisArticulo,listaObjetos,nombreListaStorage)=>{
     localStorage.setItem(nombreListaStorage,JSON.stringify(listaObjetos));
 
    
+}
+//MOSTRAR/QUITAR EQUIS DEL ARTICULO
+const mostrarQuitarEquis=(element)=>{
+    element.addEventListener("mouseover",()=>{
+        element.children[0].children[3].style.display="block"
+    })
+    
+    element.addEventListener("mouseout",()=>{
+        element.children[0].children[3].style.display="none"
+    })
 }
 
 //AGREGAR AL CARRITO
@@ -109,7 +145,27 @@ const agregarAlCarrito=(botonAgregar,listaArticulosStorage)=>{
     articulo.children[1].style.overflow="show"
     articulo.children[1].style.height="100%";
 
-    
+    //ANIMACION DE LA CARTA
     articulo.style.transform = "rotateY(180deg)";
 }
 
+
+//FUNCION PARA EL BOTON "agregar al carrito"
+const funcionBotonAgregarAlCarrito=(lista)=>{
+    const botonAgregar = document.querySelectorAll('.boton');
+    botonAgregar.forEach((element)=>{
+        element.addEventListener('click',()=>{
+            agregarAlCarrito(element,lista);
+        })
+    })
+}
+
+//FUNCION PARA BORRAR ELEMENTO
+const eliminarElementosCarritoVenta=(lista,listaLocalStorage)=>{
+    const equis = document.querySelectorAll('.equis');
+    equis.forEach((element)=>{
+        element.addEventListener('click',()=>{
+        eliminarArticulo(element,lista,listaLocalStorage);
+    });
+});
+}
