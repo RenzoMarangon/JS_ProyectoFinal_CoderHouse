@@ -1,24 +1,30 @@
 //MOSTRAR CATEGORIAS
 
-$(".header-container__li__categorias").on("mouseover",function(){
+$(()=>{
+    $(".header-container__li__categorias").on("mouseover",function(e){
+        
+        $(".header-container__sub-ul").css({
+            "height":"75px",
+            "overflow":"visible",
+        })
     
-    $(".header-container__sub-ul").css({
-        "height":"75px",
-        "overflow":"visible",
+        
     })
-
     
+    
+    $(".header-container__li__categorias").on("mouseout",function(){
+        $(".header-container__sub-ul").css({
+            "height":"0",
+            "overflow":"hidden"
+        })
+    })
+    
+        
 })
 
-
-$(".header-container__li__categorias").on("mouseout",function(){
-    $(".header-container__sub-ul").css({
-        "height":"0",
-        "overflow":"hidden"
-    })
+document.querySelector(".header-container__li__categorias").childNodes[1].addEventListener("click",(e)=>{
+    e.preventDefault();
 })
-    
-
 
 
 
@@ -29,7 +35,7 @@ const dibujarArticulo = (articulo,contenedor) =>{
     `
         <div class="cara-delantera">
             <p class="envioGratis"><span>Envío gratis</span></p>
-            <p class="oferta"><span>Oferta!</span></p>
+            <p class="oferta"><span></span></p>
             <h3>${articulo.nombre}</h3>
             <p class="equis">X</p>
             <img class="imagen" src="./img/${articulo.img}" alt="${articulo.img}">
@@ -59,6 +65,8 @@ const dibujarCartelOfertaEnvio = (articulo,caja)=>{
 
     if(articulo.oferta==true){
         caja.children[0].firstChild.nextSibling.nextSibling.nextSibling.style.display="block";
+        caja.children[0].firstChild.nextSibling.nextSibling.nextSibling.children[0].innerHTML=`$${articulo.precioAnterior}`
+
     }
 }
 
@@ -168,4 +176,19 @@ const eliminarElementosCarritoVenta=(lista,listaLocalStorage)=>{
         eliminarArticulo(element,lista,listaLocalStorage);
     });
 });
+}
+
+//FUNCION PARA MOSTRAR U OCULTAR EL BOTON 
+const mostrarOcultarBoton = (articulo) =>{
+    let boton = articulo.children[0].children[7];
+    articulo.addEventListener("mouseover",()=>{
+        boton.style.display="block";
+        boton.style.marginTop=".5rem";
+        boton.style.width="55%"
+    })
+
+    articulo.addEventListener("mouseout",()=>{
+        boton.style.display="none";
+    })
+    
 }

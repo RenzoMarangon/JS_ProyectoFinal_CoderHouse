@@ -13,6 +13,7 @@
             <div class="header-container__logo">
                 <img src="./img/logo.png" alt="Logo">
                 <h1>Comprame wachin</h1>
+                <p class="header-container__hamburguesa">☰</p>
             </div>
             <ul class="header-container__ul">
                 <li class="header-container__li"><a href="./index.html">Inicio</a></li>
@@ -40,33 +41,75 @@
         
          
         <div class="main-container">
-            <form class="main-container__form" class="agregar" id="formRegistro">
-                <h2>Agregar items</h2>
-                <input type="text" id="main-container__form__nombre" placeholder="Nombre"  required>
-                <small id="small_nombre"></small>
-                <input type="number" id="main-container__form__precio" placeholder="Precio"  required>
-                <small id="small_precio"></small>
-                <textarea type="text" id="main-container__form__descripcion" placeholder="Descripcion"  required></textarea>
-                <small id="small_descripcion"></small>
+            <div class="main-container__seleccionar">
+                <p class="main-container__seleccionar__bienvenida">¡Hola! ¿qué vas a vender?</p>
                 
-                <div class="main-container__form__label-oferta-envio">
-                    <label for="main-container__form__oferta">Oferta</label>
-                    <input type="checkbox" id="main-container__form__oferta" name="main-container__form__oferta">
+                <div class="main-container__seleccionar__imagenes">
+                    <div class="vender_televisor">
+                        <img src="./img/iconoTelevisor.png" alt="Televisor">
+                        <p>Televisores</p>
+                    </div>
+
+                    <div class="vender_notebook">
+                        <img src="./img/iconoNotebook.png" alt="Notebook">
+                        <p>Notebooks</p>
+                    </div>
+
+                    <div class="vender_computadora">
+                        <img src="./img/iconoComputadora.png" alt="Computadora">
+                        <p>Computadoras</p>
+                    </div>
+
+                    <div class="vender_celular">
+                        <img src="./img/iconoCelular.png" alt="Celular">
+                        <p>Celulares</p>
+                    </div>
+                    
+     
                 </div>
+
+                <div class="main-container__seleccionar__fondo"></div>
+            </div>
+
+            <form class="main-container__form" class="agregar" id="formRegistro" name="formRegistro">
+                <h2>Agregar ítem</h2>
+
                 
-                <div class="main-container__form__label-oferta-envio">
+                    <label for="main-container__form__nombre">Nombre</label>
+                    <input type="text" id="main-container__form__nombre" placeholder="" required>
+                    <small id="small_nombre"></small>
+                
+
+               
+                    <label for="main-container__form__precio">Precio</label>
+                    <input type="number" id="main-container__form__precio"   required>
+                    <small id="small_precio"></small>
+                
+
+                
+                    <label for="main-container__form__descripcion">Descripción</label>
+                    <textarea type="text" id="main-container__form__descripcion"   required></textarea>
+                    <small id="small_descripcion"></small>
+               
+                
+                
                     <label for="main-container__form__envioGratis">Envio gratis</label>
                     <input type="checkbox" id="main-container__form__envioGratis" name="main-container__form__envioGratis">
-                </div>
+                
+                
+                    <label for="main-container__form__oferta">Oferta</label>
+                    <input type="checkbox" id="main-container__form__oferta" name="main-container__form__oferta">
+                    
+                
+                
+                
+                    <label for="main-container__form__precioAnterior" id="label-anterior">Precio anterior</label>
+                    <input type="number" id="main-container__form__precioAnterior">
+             
+                
+                
 
-                <select name="categorias" id="main-container__form__categorias">
-                    <option value="0">Celular</option>
-                    <option value="1">Televisor</option>
-                    <option value="2">Computadora</option>
-                    <option value="3">notebook</option>
-                </select>
-
-                <input type="submit" id="main-container__form__agregar" placeholder="Agregar" class="main-container__input_lastchild">
+                <input type="submit" id="main-container__form__agregar"  class="main-container__input_lastchild">
                 <p id="main-container__error"></p>
                 <small id="small_input_sin_rellenar"></small>
                
@@ -74,7 +117,9 @@
 
 
             <div class="main-container__notificacion"></div>
-            <div class="main-container__vendidos" id="main-container__vendidos"></div>
+            <div class="main-container__vendidos" id="main-container__vendidos">
+             
+            </div>
             
         </div>
     </main>
@@ -83,9 +128,9 @@
     <script src="./javascript/funciones.js"></script>
     <script src="./javascript/objeto.js"></script>
     <script src="./javascript/vender.js"></script>
+    <script src="./javascript/header__responsive.js"></script>
 
     
 </body>
 </html>
         
-       

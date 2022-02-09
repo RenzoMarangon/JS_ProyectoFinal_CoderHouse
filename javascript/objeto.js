@@ -1,5 +1,5 @@
 class Objeto{
-    constructor(nombre,precio,descripcion,categoria,img,id,oferta,envioGratis){
+    constructor(nombre,precio,descripcion,categoria,img,id,oferta,envioGratis,precioAnterior){
         this.nombre=nombre;
         this.precio=precio;
         this.descripcion=descripcion;
@@ -8,6 +8,7 @@ class Objeto{
         this.id=id;
         this.oferta=oferta;
         this.envioGratis=envioGratis;
+        this.precioAnterior=precioAnterior;
     }
 }
 

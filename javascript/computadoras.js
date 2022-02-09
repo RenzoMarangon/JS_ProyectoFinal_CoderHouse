@@ -9,6 +9,8 @@ for(let i = 0; i<listaCompus.length;i++){
     let caja = document.querySelector("#main-container__computadoras").children[i]
     //EN CADA CONTENEDOR ME FIJO SI TIENE OFERTA O ENVIO GRATIS Y LO DIBUJO
     dibujarCartelOfertaEnvio(listaCompus[i],caja);
+
+    mostrarOcultarBoton(caja);
 }
 
 //BUSCAR COMPUTADORAS
@@ -21,6 +23,10 @@ const buscador = document.querySelector('#header-container__li__inputComputadora
 lupa.addEventListener('click',()=>{
     buscarElementos(buscador,listaCompus,containerComputadoras,"#main-container__computadoras");
     funcionBotonAgregarAlCarrito(listaCompus);
+
+    containerComputadoras.childNodes.forEach(article => {
+        mostrarOcultarBoton(article);
+    });
 })
 
 //LO MISMO PERO TOCO ENTER
@@ -29,6 +35,10 @@ $(()=>{
         if(e.keyCode==13){
             buscarElementos(buscador,listaCompus,containerComputadoras,"#main-container__computadoras");
             funcionBotonAgregarAlCarrito(listaCompus);
+
+            containerComputadoras.childNodes.forEach(article => {
+                mostrarOcultarBoton(article);
+            });
         }
     })
 })
@@ -39,6 +49,10 @@ buscador.onchange=()=>{
 
     borrarResultadosBusqueda(containerComputadoras,listaCompus,"#main-container__computadoras")
     funcionBotonAgregarAlCarrito(listaCompus);
+
+    containerComputadoras.childNodes.forEach(article => {
+        mostrarOcultarBoton(article);
+    });
 }
 
 

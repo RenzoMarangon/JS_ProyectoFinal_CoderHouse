@@ -9,6 +9,7 @@ for(let i = 0; i<listaTeles.length;i++){
     let caja = document.querySelector("#main-container__televisores").children[i]
     //EN CADA CONTENEDOR ME FIJO SI TIENE OFERTA O ENVIO GRATIS Y LO DIBUJO
     dibujarCartelOfertaEnvio(listaTeles[i],caja);
+    mostrarOcultarBoton(caja);
 }
 
 //BUSCAR TELEVISORES
@@ -22,6 +23,12 @@ lupaTele.addEventListener('click',()=>{
     //FILTRO EL RESULTADO DE LA BUSQUEDA
     buscarElementos(buscador,listaTeles,containerTelevisores,"#main-container__televisores");
     funcionBotonAgregarAlCarrito(listaTeles);
+    containerTelevisores.childNodes.forEach(article => {
+        mostrarOcultarBoton(article);
+    });
+
+    
+
 
 })
 
@@ -31,6 +38,9 @@ $(()=>{
         if(e.keyCode==13){
             buscarElementos(buscador,listaTeles,containerTelevisores,"#main-container__televisores");
             funcionBotonAgregarAlCarrito(listaTeles);
+            containerTelevisores.childNodes.forEach(article => {
+                mostrarOcultarBoton(article);
+            });
         }
     })
 })
@@ -39,8 +49,9 @@ $(()=>{
 buscador.onchange=()=>{
     borrarResultadosBusqueda(containerTelevisores,listaTeles,"#main-container__televisores")
     funcionBotonAgregarAlCarrito(listaTeles);
-
-
+    containerTelevisores.childNodes.forEach(article => {
+        mostrarOcultarBoton(article);
+    });
 }
 
 funcionBotonAgregarAlCarrito(listaTeles);

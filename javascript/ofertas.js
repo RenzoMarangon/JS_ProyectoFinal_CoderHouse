@@ -29,6 +29,7 @@ for(let i = 0; i<listaOfertas.length;i++){
     dibujarArticulo(listaOfertas[i],containerOfertas);
     let caja = document.querySelector("#main-container__ofertas").children[i]
     dibujarCartelOfertaEnvio(listaOfertas[i],caja);
+    mostrarOcultarBoton(caja);
 }
 
 let lupa = document.querySelector('#header-container__li__buscarOfertas');
@@ -41,6 +42,10 @@ lupa.addEventListener('click',()=>{
     buscarElementos(buscador,listaOfertas,containerOfertas,"#main-container__ofertas");
     funcionBotonAgregarAlCarrito(listaOfertas)
 
+    for(article of containerOfertas.children){
+        mostrarOcultarBoton(article);
+    }
+
 })
 
 //LO MISMO PERO TOCO ENTER
@@ -50,16 +55,24 @@ $(()=>{
             buscarElementos(buscador,listaOfertas,containerOfertas,"#main-container__ofertas");
             funcionBotonAgregarAlCarrito(listaOfertas)
             
+            for(article of containerOfertas.children){
+                mostrarOcultarBoton(article);
+            }
+
+        
         }
     })
 })
 
 //CUANDO BORRAN EL CONTENIDO, BORRO LO QUE ESTE EN EL CONTAINER Y DIBUJO TODA LA LISTA D CELULARES
 buscador.onchange=()=>{
-    borrarResultadosBusqueda(containerTelevisores,listaOfertas,"#main-container__televisores")
+    borrarResultadosBusqueda(containerOfertas,listaOfertas,"#main-container__ofertas")
     funcionBotonAgregarAlCarrito(listaOfertas)
 
-}
+    for(article of containerOfertas.children){
+        mostrarOcultarBoton(article);
+    }
+}   
 
 funcionBotonAgregarAlCarrito(listaOfertas)
 

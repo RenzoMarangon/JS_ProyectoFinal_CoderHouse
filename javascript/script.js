@@ -34,15 +34,11 @@ for(let i = 0; i<3; i++){
 for(let i = 0; i<listaArticulosInicio.length;i++){
     dibujarArticulo(listaArticulosInicio[i],containerArticulos);
     let caja = document.querySelector("#main-container__articulos").children[i]
-    
     dibujarCartelOfertaEnvio(listaArticulosInicio[i],caja)
-    
+    mostrarOcultarBoton(caja);
+
  
 }
-
-
-
-
 
 
 //TRAIGO LA IMAGEN DE LA LUPA Y EL CONTENIDO DEL INPUT DEL BUSCADOR
@@ -63,6 +59,7 @@ lupa.addEventListener('click',()=>{
         dibujarArticulo(listaBuscador[i],containerArticulos);
         let caja = document.querySelector("#main-container__articulos").children[i]
         dibujarCartelOfertaEnvio(listaBuscador[i],caja);
+        mostrarOcultarBoton(caja);
     }
 
     funcionBotonAgregarAlCarrito(listaArticulosInicio);
@@ -86,9 +83,12 @@ $(()=>{
                 dibujarArticulo(listaBuscador[i],containerArticulos);
                 let caja = document.querySelector("#main-container__articulos").children[i]
                 dibujarCartelOfertaEnvio(listaBuscador[i],caja);
+                mostrarOcultarBoton(caja);
             }
 
             funcionBotonAgregarAlCarrito(listaArticulosInicio);
+
+            
         }
     })
 })
@@ -98,6 +98,9 @@ buscador.onchange=()=>{
     borrarResultadosBusqueda(containerArticulos,listaArticulosInicio,"#main-container__articulos")
     funcionBotonAgregarAlCarrito(listaArticulosInicio);
 
+    containerArticulos.childNodes.forEach(element => {
+        mostrarOcultarBoton(element);
+    });
 }
 
 
