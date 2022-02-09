@@ -38,80 +38,119 @@ $(()=>{
         }else{
             $("#small_input_sin_rellenar").text("")
         }
-})
+    })
 
 
-//DESCRIPCION
-$("#main-container__form__descripcion").on("change",function(){
-    //PREGUNTO SI "descripcion" TIENE MENOS DE 10 CARACTERES
-    if($("#main-container__form__descripcion").val().length<10){
-        $("#main-container__form__descripcion").addClass("input_faltan_caracteres")
-        $("#small_descripcion").text("*La descripción debe tener al menos 10 carácteres")
-    }else{
-        $("#main-container__form__descripcion").removeClass("input_faltan_caracteres")
-        $("#small_descripcion").text("")
-    }
+    //DESCRIPCION
+    $("#main-container__form__descripcion").on("change",function(){
+        //PREGUNTO SI "descripcion" TIENE MENOS DE 10 CARACTERES
+        if($("#main-container__form__descripcion").val().length<10){
+            $("#main-container__form__descripcion").addClass("input_faltan_caracteres")
+            $("#small_descripcion").text("*La descripción debe tener al menos 10 carácteres")
+        }else{
+            $("#main-container__form__descripcion").removeClass("input_faltan_caracteres")
+            $("#small_descripcion").text("")
+        }
 
-    //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
-    if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
-        $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
-    }else{
-        $("#small_input_sin_rellenar").text("")
-    }
+        //PREGUNTO SI ALGUN INPUT TIENE MENOS DE 1 CARACTER
+        if($("#main-container__form__nombre").val().length<1 || $("#main-container__form__precio").val().length<1 || $("#main-container__form__descripcion").val().length<1){
+            $("#small_input_sin_rellenar").text("*Todos los campos son obligatorios")
+        }else{
+            $("#small_input_sin_rellenar").text("")
+        }
+    })
+
+
+
+    //SELECCION DE LA IMAGEN DEL ARTICULO QUE VOY A VENDER
+    $(".vender_televisor").on("click",function(){
+        $(".main-container__seleccionar").slideToggle(500);
+        $(".main-container__seleccionar__fondo").slideToggle(500);
+        $(".main-container__form").slideToggle(0,()=>{
+            $(".main-container__form").css("display","flex");
+        });
+        sessionStorage.setItem('imgPredeterminada',JSON.stringify('televisor.png'));
+    })
+
+    $(".vender_notebook").on("click",function(){
+        $(".main-container__seleccionar").slideToggle(500);
+        $(".main-container__seleccionar__fondo").slideToggle(500);
+        $(".main-container__form").slideToggle(0,()=>{
+            $(".main-container__form").css("display","flex");
+        });
+        
+        sessionStorage.setItem('imgPredeterminada',JSON.stringify('notebook.png'));
+    })
+
+    $(".vender_celular").on("click",function(){
+        $(".main-container__seleccionar").slideToggle(500);
+        $(".main-container__seleccionar__fondo").slideToggle(500);
+        $(".main-container__form").slideToggle(0,()=>{
+            $(".main-container__form").css("display","flex");
+        });
+        sessionStorage.setItem('imgPredeterminada',JSON.stringify('celular.png'));
+
+    })
+
+    $(".vender_computadora").on("click",function(){
+        $(".main-container__seleccionar").slideToggle(500);
+        $(".main-container__seleccionar__fondo").slideToggle(500);
+        $(".main-container__form").slideToggle(0,()=>{
+            $(".main-container__form").css("display","flex");
+        });
+        sessionStorage.setItem('imgPredeterminada',JSON.stringify('computadora.png'));
+
+    })
+
+    
+    
 })
-})
+
 
 //GUARDO TODOS LOS INPUT 
+const agregar = document.querySelector('#main-container__form__agregar');
 const nombre = document.querySelector('#main-container__form__nombre');
 const precio = document.querySelector('#main-container__form__precio');
 const descripcion = document.querySelector('#main-container__form__descripcion');
-const agregar = document.querySelector('#main-container__form__agregar');
 const error = document.querySelector('#main-container__error');
 const oferta = document.querySelector('#main-container__form__oferta');
 const envio = document.querySelector('#main-container__form__envioGratis');
-const categoria = document.querySelector('#main-container__form__categorias')
+const precioPrevio = document.querySelector("#main-container__form__precioAnterior");
 
 
 
+//CREAR ARTICULO VENDIDO
 agregar.addEventListener('click',()=>{
     let nombreArticulo = nombre.value;
     let precioArticulo = precio.value;
     let descripcionArticulo = descripcion.value;
     let ofertaArticulo = oferta.checked;
     let envioArticulo = envio.checked;
-    let categoriasArticulo = categoria.value;
-    let imagenArticulo = "";
-
-    //DEPENDE LA CATEGORIA, GUARDO UNA IMAGEN GENERICA
-    if(categoriasArticulo==0){
-        categoriasArticulo="celular";
-        imagenArticulo="celular.png"
-    }else if (categoriasArticulo==1){
-        categoriasArticulo="televisor";
-        imagenArticulo="televisor.png"
-    }else if (categoriasArticulo==2){
-        categoriasArticulo="computadora";
-        imagenArticulo="computadora.png"
-    }else{
-        categoriasArticulo="computadora";
-        imagenArticulo="notebook.png"
+    let categoriasArticulo = JSON.parse(sessionStorage.getItem('imgPredeterminada')).replace(".png","");
+    let imagenArticulo = JSON.parse(sessionStorage.getItem('imgPredeterminada'));
+    let precioAnt = precioPrevio.value;
+    if(precioAnt.length<1){
+        precioAnt=0;
     }
-    //CREO EL OBJETO
-    let nuevoObjeto = new Objeto(nombreArticulo,precioArticulo,descripcionArticulo,categoriasArticulo,imagenArticulo,0,ofertaArticulo,envioArticulo);
 
-    //UTILIZO UN ARRAY PARA GUARDAR LOS OBJETOS
-    let arrayObjetos = []
-    let listaOb = JSON.parse(localStorage.getItem('vendidos'));
+    if(nombreArticulo.length>4 && precioArticulo.length>1 && descripcionArticulo.length>9){
+        //CREO EL OBJETO
+        let nuevoObjeto = new Objeto(nombreArticulo,precioArticulo,descripcionArticulo,categoriasArticulo,imagenArticulo,0,ofertaArticulo,envioArticulo,precioAnt);
 
-    if(listaOb == null){
-        arrayObjetos.push(nuevoObjeto);
-        localStorage.setItem('vendidos',JSON.stringify(arrayObjetos))
-        
-    }else{
-        arrayObjetos=arrayObjetos.concat(listaOb);
-        arrayObjetos.push(nuevoObjeto);
-        localStorage.setItem('vendidos',JSON.stringify(arrayObjetos))
-        
+        //UTILIZO UN ARRAY PARA GUARDAR LOS OBJETOS
+        let arrayObjetos = []
+        let listaOb = JSON.parse(localStorage.getItem('vendidos'));
+
+        if(listaOb == null){
+            arrayObjetos.push(nuevoObjeto);
+            localStorage.setItem('vendidos',JSON.stringify(arrayObjetos))
+            
+        }else{
+            arrayObjetos=arrayObjetos.concat(listaOb);
+            arrayObjetos.push(nuevoObjeto);
+            localStorage.setItem('vendidos',JSON.stringify(arrayObjetos))
+            
+        }
     }
     
     
@@ -170,3 +209,17 @@ buscarVendidos.onchange=()=>{
                 mostrarQuitarEquis(element);
             }
 };
+
+
+const checkbox = document.querySelector("#main-container__form__oferta");
+const labelPrecioAnterior = document.querySelector("#label-anterior");
+
+checkbox.addEventListener("click",()=>{
+    if(checkbox.checked){
+        $("#label-anterior").slideToggle(500);
+        $("#main-container__form__precioAnterior").slideToggle(500);
+    }else{
+        $("#label-anterior").slideToggle(500);
+        $("#main-container__form__precioAnterior").slideToggle(500);
+    }
+})

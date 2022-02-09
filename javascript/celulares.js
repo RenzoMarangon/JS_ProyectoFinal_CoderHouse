@@ -10,6 +10,8 @@ for(let i = 0; i<listaCelus.length;i++){
     let caja = document.querySelector("#main-container__celulares").children[i]
     //EN CADA CONTENEDOR ME FIJO SI TIENE OFERTA O ENVIO GRATIS Y LO DIBUJO
     dibujarCartelOfertaEnvio(listaCelus[i],caja);
+
+    mostrarOcultarBoton(caja);
 }
 
 //BUSCAR CELULARES
@@ -22,6 +24,10 @@ lupaCelu.addEventListener('click',()=>{
     //FILTRO EL RESULTADO DE LA BUSQUEDA
     buscarElementos(buscador,listaCelus,containerCelulares,"#main-container__celulares");
     funcionBotonAgregarAlCarrito(listaCelus);
+
+    containerCelulares.childNodes.forEach(article => {
+        mostrarOcultarBoton(article);
+    });
 })
 
 //LO MISMO PERO TOCO ENTER
@@ -30,6 +36,10 @@ $(()=>{
         if(e.keyCode==13){
             buscarElementos(buscador,listaCelus,containerCelulares,"#main-container__celulares");
             funcionBotonAgregarAlCarrito(listaCelus);
+
+            containerCelulares.childNodes.forEach(article => {
+                mostrarOcultarBoton(article);
+            });
         }
     })
 })
@@ -38,6 +48,10 @@ $(()=>{
 buscador.onchange=()=>{
     borrarResultadosBusqueda(containerCelulares,listaCelus,"#main-container__celulares")
     funcionBotonAgregarAlCarrito(listaCelus);
+
+    containerCelulares.childNodes.forEach(article => {
+        mostrarOcultarBoton(article);
+    });
 }
 
 funcionBotonAgregarAlCarrito(listaCelus);

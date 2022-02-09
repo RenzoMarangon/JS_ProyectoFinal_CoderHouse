@@ -122,9 +122,33 @@ for(let i=0; i<articulosEnElCarrito.length-1;i++){
         articulosEnElCarrito[i].style.background="none"
         articulosEnElCarrito[i].children[0].children[3].style.display="none"
     }
-
-
 }
+
+
+
+
+//PREGUNTO SI DENTRO DEL CARRITO HAY IMAGENES DE CELULAR O NOTEBOOK
+const imgCelulares = document.querySelectorAll(".cara-delantera");
+
+if(document.body.clientWidth>750 && document.body.clientWidth<900){
+    imgCelulares.forEach((imagen)=>{
+        let img = imagen.childNodes[9];
+    
+       img.style.display="none";
+    
+    })
+    console.log("true")
+}
+
+
+    
+
+
+
+
+
+
+
 
 
 
